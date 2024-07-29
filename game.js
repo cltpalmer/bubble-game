@@ -53,11 +53,9 @@ function generateBubbles() {
         bubble.dataset.isCorrect = Math.random() < 0.5; // Randomly mark bubbles as correct or incorrect
         if (bubble.dataset.isCorrect === 'true') {
             bubble.textContent = emotionLabels[Math.floor(Math.random() * emotionLabels.length)];
-            bubble.style.color = 'white';
-            bubble.style.textAlign = 'center';
-            bubble.style.lineHeight = `${size}px`;
         }
         gameContainer.appendChild(bubble);
+        console.log(`Generated bubble at ${bubble.style.left} with color ${bubble.style.backgroundColor}`);
         animateBubble(bubble);
         bubbles.push(bubble);
         setTimeout(generateBubbles, Math.random() * 500 + 500);
