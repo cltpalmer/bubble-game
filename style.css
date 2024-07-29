@@ -22,7 +22,16 @@ body, html {
     align-items: center;
 }
 
-#playButton, #resumeButton, #quitButton {
+#playButton {
+    background: url('/mnt/data/2.jpg') no-repeat center center;
+    background-size: contain;
+    width: 200px;
+    height: 200px;
+    border: none;
+    cursor: pointer;
+}
+
+#resumeButton, #quitButton {
     background-color: purple;
     border: none;
     color: white;
