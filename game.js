@@ -6,29 +6,35 @@ let quitButton = document.getElementById('quitButton');
 let playAgainButton = document.getElementById('playAgainButton');
 let pauseOverlay = document.getElementById('pauseOverlay');
 let timerElement = document.getElementById('timer');
+let pointsElement = document.getElementById('points');
 
 let bubbles = [];
 let timer;
 let gameInterval;
+let speedInterval;
 let isPaused = false;
 
 const bubbleColors = ['#800080', '#008000', '#FFFFFF']; // Using hex codes for colors
 const emotionLabels = ['happy', 'sad', 'angry']; // Sample emotion labels
 let correctBubbleCount = 0;
 let totalBubbleCount = 0;
-let bubbleSpeed = 2000; // Initial speed in milliseconds
-let speedIncrement = 50; // Speed increment value in milliseconds
+let points = 0;
+let bubbleSpeed = 8000; // Initial speed in milliseconds (8 seconds)
 
 function startGame() {
     playButton.style.display = 'none';
     pauseButton.style.display = 'block';
     timerElement.style.display = 'block';
+    pointsElement.style.display = 'block';
     correctBubbleCount = 0;
     totalBubbleCount = 0;
+    points = 0;
+    bubbleSpeed = 8000;
     timer = 60;
     timerElement.textContent = timer;
-    bubbleSpeed = 2000; // Reset speed at the start of the game
+    pointsElement.textContent = `Points: ${points}`;
     gameInterval = setInterval(gameLoop, 1000);
+    speedInterval = setInterval(increaseSpeed, 10000);
     gameContainer.addEventListener('click', handleBubbleClick);
     generateBubbles();
 }
@@ -39,9 +45,13 @@ function gameLoop() {
         timerElement.textContent = timer;
         if (timer <= 0) {
             endGame();
-        } else if (bubbleSpeed > 500) { // Ensure the speed doesn't go below a certain threshold
-            bubbleSpeed -= speedIncrement; // Gradually increase speed
         }
+    }
+}
+
+function increaseSpeed() {
+    if (bubbleSpeed > 2000) {
+        bubbleSpeed -= 1000; // Increase speed by reducing the duration by 1 second
     }
 }
 
@@ -84,10 +94,13 @@ function handleBubbleClick(event) {
             gameContainer.style.backgroundColor = 'green';
             setTimeout(() => gameContainer.style.backgroundColor = 'black', 300);
             correctBubbleCount++;
+            points += 10; // Add points for correct bubble
         } else {
             gameContainer.style.backgroundColor = 'red';
             setTimeout(() => gameContainer.style.backgroundColor = 'black', 300);
+            points -= 5; // Deduct points for incorrect bubble
         }
+        pointsElement.textContent = `Points: ${points}`;
         bubble.remove();
         bubbles = bubbles.filter(b => b !== bubble);
         totalBubbleCount++;
@@ -97,6 +110,7 @@ function handleBubbleClick(event) {
 function pauseGame() {
     isPaused = true;
     clearInterval(gameInterval);
+    clearInterval(speedInterval);
     bubbles.forEach(bubble => {
         let computedStyle = getComputedStyle(bubble);
         bubble.dataset.left = computedStyle.left;
@@ -114,23 +128,26 @@ function resumeGame() {
     });
     pauseOverlay.style.display = 'none';
     gameInterval = setInterval(gameLoop, 1000);
+    speedInterval = setInterval(increaseSpeed, 10000);
     generateBubbles();
 }
 
 function quitGame() {
     clearInterval(gameInterval);
+    clearInterval(speedInterval);
     resetGame();
 }
 
 function endGame() {
     clearInterval(gameInterval);
+    clearInterval(speedInterval);
     gameContainer.removeEventListener('click', handleBubbleClick);
     pauseButton.style.display = 'none';
     timerElement.style.display = 'none';
     bubbles.forEach(bubble => bubble.remove());
     bubbles = [];
     playAgainButton.style.display = 'block';
-    alert(`Game Over! Correct Bubbles: ${correctBubbleCount}, Total Bubbles: ${totalBubbleCount}`);
+    alert(`Game Over! Correct Bubbles: ${correctBubbleCount}, Total Bubbles: ${totalBubbleCount}, Points: ${points}`);
 }
 
 function resetGame() {
@@ -142,6 +159,7 @@ function resetGame() {
     pauseButton.style.display = 'none';
     playAgainButton.style.display = 'none';
     timerElement.style.display = 'none';
+    pointsElement.style.display = 'none';
     gameContainer.style.backgroundColor = 'black';
 }
 
