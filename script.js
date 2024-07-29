@@ -47,8 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function createBubble() {
         const bubble = document.createElement("div");
         bubble.classList.add("bubble");
-        bubble.style.width = bubble.style.height = Math.random() * 50 + 30 + "px";
-        bubble.style.left = Math.random() * (gameArea.offsetWidth - 50) + "px";
+        const size = Math.random() * 50 + 30;
+        bubble.style.width = bubble.style.height = size + "px";
+        bubble.style.left = Math.random() * (gameArea.offsetWidth - size) + "px";
         bubble.style.top = "0px";
         bubble.style.backgroundColor = getRandomColor();
         if (Math.random() > 0.5) {
