@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function getRandomColor() {
-        const colors = ["purple", "green", "white"];
+        const colors = ["#bb86fc", "#03dac6", "#ffffff"];
         return colors[Math.floor(Math.random() * colors.length)];
     }
 
