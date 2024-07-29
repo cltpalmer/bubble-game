@@ -16,6 +16,8 @@ const bubbleColors = ['#800080', '#008000', '#FFFFFF']; // Using hex codes for c
 const emotionLabels = ['happy', 'sad', 'angry']; // Sample emotion labels
 let correctBubbleCount = 0;
 let totalBubbleCount = 0;
+let bubbleSpeed = 2000; // Initial speed in milliseconds
+let speedIncrement = 50; // Speed increment value in milliseconds
 
 function startGame() {
     playButton.style.display = 'none';
@@ -25,6 +27,7 @@ function startGame() {
     totalBubbleCount = 0;
     timer = 60;
     timerElement.textContent = timer;
+    bubbleSpeed = 2000; // Reset speed at the start of the game
     gameInterval = setInterval(gameLoop, 1000);
     gameContainer.addEventListener('click', handleBubbleClick);
     generateBubbles();
@@ -36,6 +39,8 @@ function gameLoop() {
         timerElement.textContent = timer;
         if (timer <= 0) {
             endGame();
+        } else if (bubbleSpeed > 500) { // Ensure the speed doesn't go below a certain threshold
+            bubbleSpeed -= speedIncrement; // Gradually increase speed
         }
     }
 }
@@ -62,15 +67,14 @@ function generateBubbles() {
 }
 
 function animateBubble(bubble) {
-    let moveDuration = 2000;
-    bubble.style.transition = `left ${moveDuration}ms linear`;
+    bubble.style.transition = `left ${bubbleSpeed}ms linear`;
     setTimeout(() => {
         bubble.style.left = `${gameContainer.clientWidth}px`;
     }, 0);
     setTimeout(() => {
         bubble.remove();
         bubbles = bubbles.filter(b => b !== bubble);
-    }, moveDuration);
+    }, bubbleSpeed);
 }
 
 function handleBubbleClick(event) {
@@ -105,7 +109,7 @@ function pauseGame() {
 function resumeGame() {
     isPaused = false;
     bubbles.forEach(bubble => {
-        bubble.style.transition = 'left 2000ms linear';
+        bubble.style.transition = `left ${bubbleSpeed}ms linear`;
         bubble.style.left = `${gameContainer.clientWidth}px`;
     });
     pauseOverlay.style.display = 'none';
