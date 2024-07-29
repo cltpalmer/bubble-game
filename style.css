@@ -1,33 +1,43 @@
 body {
-    margin: 0;
-    overflow: hidden;
     font-family: 'Montserrat', sans-serif;
     background-color: black;
+    color: white;
+    margin: 0;
+    overflow: hidden;
+}
+
+button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: purple;
+    color: white;
 }
 
 .hidden {
     display: none;
 }
 
-#loadScreen, #pauseScreen, #endScreen {
+#load-screen, #pause-screen, #end-screen {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-#playButton, #resumeButton, #quitButton, #playAgainButton, #exitButton {
-    background-color: #8A2BE2;
-    color: white;
-    font-size: 2em;
-    padding: 20px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-#gameScreen {
+#game-screen {
     position: relative;
+    height: 100vh;
+    width: 100vw;
 }
 
 #timer {
@@ -35,24 +45,19 @@ body {
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
+    font-size: 24px;
     color: white;
-    font-size: 2em;
 }
 
-#pauseButton {
+#pause-button {
     position: absolute;
     top: 10px;
     left: 10px;
-    background-color: #8A2BE2;
-    color: white;
-    font-size: 1.5em;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
 }
 
-canvas {
+#game-canvas {
     display: block;
-    width: 100vw;
-    height: 100vh;
+    background-color: black;
+    width: 100%;
+    height: 100%;
 }
