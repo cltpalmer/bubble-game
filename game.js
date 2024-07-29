@@ -48,8 +48,8 @@ function generateBubbles() {
         bubble.style.width = `${size}px`;
         bubble.style.height = `${size}px`;
         bubble.style.backgroundColor = bubbleColors[Math.floor(Math.random() * bubbleColors.length)];
-        bubble.style.top = '-50px';
-        bubble.style.left = `${Math.random() * (gameContainer.clientWidth - size)}px`;
+        bubble.style.left = '-50px';
+        bubble.style.top = `${Math.random() * (gameContainer.clientHeight - size)}px`;
         bubble.dataset.isCorrect = Math.random() < 0.5; // Randomly mark bubbles as correct or incorrect
         if (bubble.dataset.isCorrect === 'true') {
             bubble.textContent = emotionLabels[Math.floor(Math.random() * emotionLabels.length)];
@@ -62,15 +62,15 @@ function generateBubbles() {
 }
 
 function animateBubble(bubble) {
-    let fallDuration = 2000;
-    bubble.style.transition = `top ${fallDuration}ms linear`;
+    let moveDuration = 2000;
+    bubble.style.transition = `left ${moveDuration}ms linear`;
     setTimeout(() => {
-        bubble.style.top = `${gameContainer.clientHeight}px`;
+        bubble.style.left = `${gameContainer.clientWidth}px`;
     }, 0);
     setTimeout(() => {
         bubble.remove();
         bubbles = bubbles.filter(b => b !== bubble);
-    }, fallDuration);
+    }, moveDuration);
 }
 
 function handleBubbleClick(event) {
@@ -95,9 +95,9 @@ function pauseGame() {
     clearInterval(gameInterval);
     bubbles.forEach(bubble => {
         let computedStyle = getComputedStyle(bubble);
-        bubble.dataset.top = computedStyle.top;
+        bubble.dataset.left = computedStyle.left;
         bubble.style.transition = 'none';
-        bubble.style.top = computedStyle.top;
+        bubble.style.left = computedStyle.left;
     });
     pauseOverlay.style.display = 'flex';
 }
@@ -105,8 +105,8 @@ function pauseGame() {
 function resumeGame() {
     isPaused = false;
     bubbles.forEach(bubble => {
-        bubble.style.transition = 'top 2000ms linear';
-        bubble.style.top = `${gameContainer.clientHeight}px`;
+        bubble.style.transition = 'left 2000ms linear';
+        bubble.style.left = `${gameContainer.clientWidth}px`;
     });
     pauseOverlay.style.display = 'none';
     gameInterval = setInterval(gameLoop, 1000);
