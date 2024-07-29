@@ -30,7 +30,6 @@ playAgainButton.addEventListener('click', startGame);
 exitButton.addEventListener('click', () => window.location.reload());
 
 function startGame() {
-    console.log('Game Started');
     loadScreen.classList.add('hidden');
     endScreen.classList.add('hidden');
     gameScreen.classList.remove('hidden');
@@ -44,7 +43,6 @@ function startGame() {
 }
 
 function pauseGame() {
-    console.log('Game Paused');
     paused = true;
     clearInterval(gameInterval);
     clearInterval(bubbleInterval);
@@ -52,7 +50,6 @@ function pauseGame() {
 }
 
 function resumeGame() {
-    console.log('Game Resumed');
     paused = false;
     gameInterval = setInterval(updateGame, 1000 / 60);
     bubbleInterval = setInterval(generateBubble, 500);
@@ -60,7 +57,6 @@ function resumeGame() {
 }
 
 function quitGame() {
-    console.log('Game Quit');
     paused = false;
     clearInterval(gameInterval);
     clearInterval(bubbleInterval);
@@ -80,7 +76,6 @@ function countdown() {
 }
 
 function endGame() {
-    console.log('Game Ended');
     clearInterval(gameInterval);
     clearInterval(bubbleInterval);
     gameScreen.classList.add('hidden');
@@ -106,10 +101,7 @@ function updateGame() {
     bubbles.forEach((bubble, index) => {
         bubble.y += bubble.speed;
 
-        if (bubble.y > canvas.height - bubble.radius) {
-            bubble.speed = -bubble.speed * 0.5;
-        }
-        if (bubble.y < bubble.radius) {
+        if (bubble.y > canvas.height - bubble.radius || bubble.y < bubble.radius) {
             bubble.speed = -bubble.speed * 0.5;
         }
 
