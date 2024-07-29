@@ -7,22 +7,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="load-screen">
-        <button id="play-button">Play</button>
+    <div id="loadScreen">
+        <button id="playButton">Play</button>
     </div>
-    <div id="game-screen" class="hidden">
+    <div id="gameScreen" class="hidden">
         <div id="timer">60</div>
-        <button id="pause-button">Pause</button>
-        <canvas id="game-canvas"></canvas>
+        <button id="pauseButton">Pause</button>
+        <div id="gameArea"></div>
+        <div id="instructions">Choose the balls with emotions.</div>
     </div>
-    <div id="pause-screen" class="hidden">
-        <button id="resume-button">Resume</button>
-        <button id="quit-button">Quit</button>
-    </div>
-    <div id="end-screen" class="hidden">
-        <p id="score">Your score: 0</p>
-        <button id="play-again-button">Play Again</button>
-        <button id="exit-button">Exit</button>
+    <div id="pauseScreen" class="hidden">
+        <button id="resumeButton">Resume</button>
+        <button id="quitButton">Quit</button>
     </div>
     <script src="script.js"></script>
 </body>
