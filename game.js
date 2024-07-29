@@ -12,7 +12,7 @@ let timer;
 let gameInterval;
 let isPaused = false;
 
-const bubbleColors = ['purple', 'green', 'white'];
+const bubbleColors = ['#800080', '#008000', '#FFFFFF']; // Using hex codes for colors
 const emotionLabels = ['happy', 'sad', 'angry']; // Sample emotion labels
 let correctBubbleCount = 0;
 let totalBubbleCount = 0;
@@ -55,7 +55,6 @@ function generateBubbles() {
             bubble.textContent = emotionLabels[Math.floor(Math.random() * emotionLabels.length)];
         }
         gameContainer.appendChild(bubble);
-        console.log(`Generated bubble at ${bubble.style.left} with color ${bubble.style.backgroundColor}`);
         animateBubble(bubble);
         bubbles.push(bubble);
         setTimeout(generateBubbles, Math.random() * 500 + 500);
