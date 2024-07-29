@@ -1,0 +1,59 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.hidden {
+    display: none;
+}
+
+#loadScreen, #pauseScreen, #endScreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+}
+
+#playButton, #resumeButton, #quitButton, #playAgainButton, #exitButton {
+    background-color: #8A2BE2;
+    color: white;
+    font-size: 2em;
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#gameScreen {
+    position: relative;
+    background-color: black;
+}
+
+#timer {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 2em;
+}
+
+#pauseButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #8A2BE2;
+    color: white;
+    font-size: 1.5em;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loadScreen">
+        <button id="playButton">Play</button>
+    </div>
+    <div id="gameScreen" class="hidden">
+        <div id="timer">60</div>
+        <button id="pauseButton">Pause</button>
+        <canvas id="gameCanvas"></canvas>
+    </div>
+    <div id="pauseScreen" class="hidden">
+        <button id="resumeButton">Resume</button>
+        <button id="quitButton">Quit</button>
+    </div>
+    <div id="endScreen" class="hidden">
+        <div id="score"></div>
+        <button id="playAgainButton">Play Again</button>
+        <button id="exitButton">Exit</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
